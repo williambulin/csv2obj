@@ -7,6 +7,9 @@
 !/Cargo.toml
 !/config.yaml
 
+# CI
+!/.github/workflows/build.yml
+
 # Repository
 !/.gitignore
 !/LICENSE

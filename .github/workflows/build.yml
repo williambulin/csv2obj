@@ -1,0 +1,54 @@
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [win64, linux, macos]
+        include:
+          - target: win64
+            os: windows-latest
+          - target: linux
+            os: linux-latest
+          - target: macos
+            os: macos-latest
+    name: Build
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+
+      - name: Build
+        run: |
+          cargo build --release
+
+      - name: Artifact (Windows)
+        if: matrix.target == 'win64'
+        uses: actions/upload-artifact@v2
+        with:
+          name: csv2obj-win64.exe
+          path: ./target/release/csv2obj.exe
+
+      - name: Artifact (Linux)
+        if: matrix.target == 'linux'
+        uses: actions/upload-artifact@v2
+        with:
+          name: csv2obj-linux
+          path: ./target/release/csv2obj
+
+      - name: Artifact (macOS)
+        if: matrix.target == 'macos'
+        uses: actions/upload-artifact@v2
+        with:
+          name: csv2obj-macos
+          path: ./target/release/csv2obj
