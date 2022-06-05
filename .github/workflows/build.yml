@@ -17,6 +17,7 @@ jobs:
             os: linux-latest
           - target: macos
             os: macos-latest
+
     name: Build
     runs-on: ${{matrix.os}}
     steps:
