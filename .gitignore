@@ -1,0 +1,13 @@
+# Whitelisting instead of blacklisting
+*
+!*/
+
+# Project
+!/src/*.rs
+!/Cargo.toml
+!/config.yaml
+
+# Repository
+!/.gitignore
+!/LICENSE
+!/README.md
