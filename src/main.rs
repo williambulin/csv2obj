@@ -5,7 +5,7 @@ use yaml_rust::YamlLoader;
 fn main() {
     let env: Vec<String> = std::env::args().collect();
     if env.len() <= 1 {
-        eprintln!("Usage: {} <yaml file>", &env[0]);
+        eprintln!("Usage: {} <csv file>", &env[0]);
         return;
     }
 
